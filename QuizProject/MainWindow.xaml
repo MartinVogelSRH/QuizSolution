@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuizProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded" >
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Quiz4U :)" ></TextBlock>
+        <StackPanel x:Name="span_Questions" Grid.Row="1" HorizontalAlignment="Stretch" Margin="10,0,10,0">
+            <TextBlock x:Name="tbl_Question" TextWrapping="Wrap" HorizontalAlignment="Stretch" Text="{Binding QuestionText}"></TextBlock>
+            <ListBox x:Name="lbx_Answers" Margin="0,10,0,0" ItemsSource="{Binding Answers}" KeyUp="lbx_Answers_KeyUp">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock x:Name="tbl_answer" Text="{Binding AnswerText}"></TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+        </StackPanel>
+        <Button x:Name="btn_OK" Grid.Row="3" HorizontalAlignment="Right" Content="OK" Click="btn_OK_Click"></Button>
     </Grid>
 </Window>
