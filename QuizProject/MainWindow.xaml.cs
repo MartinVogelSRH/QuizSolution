@@ -67,6 +67,8 @@ namespace QuizProject
             questions = MyStorage.readXML<List<Question>>("Questions.xml");
             intQuestionsCount = questions.Count;
             span_Questions.DataContext = questions[rand.Next(0, questions.Count - 1)];
+            prog_QuizProgress.Value = 0;
+            prog_QuizProgress.Maximum = questions.Count;
         }
 
         private void btn_OK_Click(object sender, RoutedEventArgs e)
@@ -93,12 +95,14 @@ namespace QuizProject
                 if (questions.Count > 1)
                 {
                     //currentQuestion++;
+                    prog_QuizProgress.Value++;
                     questions.Remove((Question)span_Questions.DataContext);
                     span_Questions.DataContext = questions[rand.Next(0, questions.Count - 1)];
                 }
                 else
                 {
-                    if(MessageBox.Show("You completed this Quiz \r\nCorrect Answers: " + intCorrectAnswers.ToString() + "/" + intQuestionsCount.ToString() + "\r\nDo you want to start again?", "Done",MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    prog_QuizProgress.Value++;
+                    if (MessageBox.Show("You completed this Quiz \r\nCorrect Answers: " + intCorrectAnswers.ToString() + "/" + intQuestionsCount.ToString() + "\r\nDo you want to start again?", "Done",MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         Window_Loaded(null, null);
                     }
